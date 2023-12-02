@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Read Text File</title>
+</head>
+
+<body>
+    <input type="file" name="inputfile" id="inputfile">
+    <br>
+
+    <pre id="output"></pre>
+
+    <script type="text/javascript">
+
+        function processGame(gameString) {
+        console.log(gameString);
+        const gameNum = parseInt(gameString);
+        console.log(gameNum);
+
+        const drawings = gameString.split(";")
+        console.log(drawings);
+        }
+
+        document.getElementById('inputfile')
+            .addEventListener('change', function () {
+
+                let fr = new FileReader();
+                fr.onload = function () {
+                    const itemList = fr.result.split(/\r?\n/);
+
+                    for (let i = 0 ; i < itemList.length; i++) {
+                    processGame(itemList[i].replace("Game", ""));
+                    }
+                }
+
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+</body>
+
+</html>
