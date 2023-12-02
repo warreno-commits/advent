@@ -41,26 +41,26 @@
 }
 
     function lastDigit(num) {
-    ind = 999
-    firstNum = "blank"
+    ind = 0
+    lastNum = "blank"
     for (let i = 0; i < stringNums.length; i++){
     const check = stringNums[i]
-    const rank = num.indexOf(check)
-    if (rank < ind && rank >= 0 ) {
+    const rank = num.lastIndexOf(check)
+    if (rank >= ind && rank >= 0 ) {
     ind = rank
-    firstNum = check
+    lastNum = check
     }
     }
-    if (firstNum == "one") {
-    return "1" } else if (firstNum == "two") {
-    return "2"} else if (firstNum == "three") {
-    return "3"} else if (firstNum == "four") {
-    return "4"} else if (firstNum == "five") {
-    return "5"} else if (firstNum == "six") {
-    return "6"} else if (firstNum == "seven") {
-    return "7"} else if (firstNum == "eight") {
-    return "8"} else if (firstNum == "nine") {
-    return "9"} else { return firstNum }
+    if (lastNum == "one") {
+    return "1" } else if (lastNum == "two") {
+    return "2"} else if (lastNum == "three") {
+    return "3"} else if (lastNum == "four") {
+    return "4"} else if (lastNum == "five") {
+    return "5"} else if (lastNum == "six") {
+    return "6"} else if (lastNum == "seven") {
+    return "7"} else if (lastNum == "eight") {
+    return "8"} else if (lastNum == "nine") {
+    return "9"} else { return lastNum }
 }
         document.getElementById('inputfile')
             .addEventListener('change', function () {
