@@ -12,14 +12,47 @@
     <pre id="output"></pre>
 
     <script type="text/javascript">
+        let runningTotal = 0
 
         function processGame(gameString) {
         console.log(gameString);
         const gameNum = parseInt(gameString);
-        console.log(gameNum);
+        gameStatus = "Valid"
+        console.log("Game Status: " + gameStatus)
+        console.log("Game " + gameNum);
 
-        const drawings = gameString.split(";")
+        const drawings = gameString.substring(gameString.indexOf(":")+1).split(";")
         console.log(drawings);
+            for( i=0 ; i < drawings.length; i++){
+            console.log(drawings[i]);
+
+            const pairs = drawings[i].split(",");
+            console.log(pairs)
+            if(pairHelper(pairs) == "Invalid" ){
+            gameStatus = "Invalid" }
+            }
+        console.log(runningTotal)
+        if(gameStatus == "Valid"){
+        runningTotal = runningTotal + gameNum ;
+        console.log("Running Total: " + runningTotal);}
+        }
+
+        function pairHelper(pairs){
+        for( j =0 ; j < pairs.length ; j++){
+        console.log(parseInt(pairs[j]))
+        const ballNumber = parseInt(pairs[j])
+        console.log(pairs[j].replace(/\d+/g, '').trim())
+        const ballColor = pairs[j].replace(/\d+/g, '').trim()
+        if(ballColor == "blue" && ballNumber > 14) {
+        console.log("Invalid Game");
+        return "Invalid";}
+        if(ballColor == "green" && ballNumber > 13) {
+        console.log("Invalid Game");
+        return "Invalid";}
+        if(ballColor == "red" && ballNumber > 12) {
+        console.log("Invalid Game");
+        return "Invalid";}
+        }
         }
 
         document.getElementById('inputfile')
