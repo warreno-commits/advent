@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Read Text File</title>
+</head>
+
+<body>
+    <input type="file" name="inputfile" id="inputfile">
+    <br>
+
+    <pre id="output"></pre>
+
+    <script type="text/javascript">
+
+    const stringNums = ["one", "1", "two", "2", "three", "3",
+    "four", "4", "five", "5", "six", "6", "seven", "7", "eight", "8"
+    , "nine", "9"]
+
+    function firstDigit(num) {
+    ind = 999
+    for (let i = 0; i < stringNums.length; i++){
+    const check = stringNums[i]
+    const rank = num.indexOf(check)
+    if (rank < ind && rank >= 0 ) {ind = rank }
+    }
+    return ind
+}
+
+    function lastDigit(num) {
+    for (var i = num.length - 1; i >= 0; i--) {
+    if (!isNaN(num.charAt(i))) return Number(num.charAt(i));
+  }
+  return null;
+}
+        document.getElementById('inputfile')
+            .addEventListener('change', function () {
+
+                let fr = new FileReader();
+                fr.onload = function () {
+                    const itemList = fr.result.split(/\r?\n/);
+                    let runningSum = 0
+
+                    for (let i = 0 ; i < itemList.length; i++) {
+                    const sum = Number("" + firstDigit(itemList[i]) + lastDigit(itemList[i]))
+                    console.log(itemList[i]
+                    + " First Digit: " + firstDigit(itemList[i])
+                    + " Last Digit: " + lastDigit(itemList[i])
+                    + " Total: " + sum )
+                    runningSum = runningSum + sum
+                    console.log("Running Total:" + runningSum)
+                    }
+                }
+
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+</body>
+
+</html>
