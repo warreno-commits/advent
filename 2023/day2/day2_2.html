@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Read Text File</title>
+</head>
+
+<body>
+    <input type="file" name="inputfile" id="inputfile">
+    <br>
+
+    <pre id="output"></pre>
+
+    <script type="text/javascript">
+        let runningTotal = 0
+
+        function processGame(gameString) {
+        console.log(gameString);
+        const gameNum = parseInt(gameString);
+        console.log("Game " + gameNum);
+
+        drawings = gameString.substring(gameString.indexOf(":")+1).split(";")
+        console.log("Drawings:" + drawings);
+        minBlue = 0
+        minRed = 0
+        minGreen = 0
+            for( i=0 ; i < drawings.length; i++){
+            console.log("Drawings element:" + drawings[i]);
+            const pairs = drawings[i].split(",");
+            cleanList = pairHelper(pairs).split(":");
+            console.log(cleanList);
+            for(k=0; k < cleanList.length; k++){
+            // console.log(cleanList[k].split(";")[1]);
+            if (k == 0 && parseInt(cleanList[k].split(";")[1]) > minBlue) {
+            minBlue = parseInt(cleanList[k].split(";")[1])
+            console.log("MinBlue is: " + minBlue)}
+            else if (k == 1 && parseInt(cleanList[k].split(";")[1]) > minRed) {
+            minRed = parseInt(cleanList[k].split(";")[1])
+            console.log("MinRed is: " + minRed)}
+            else if (k == 2 && parseInt(cleanList[k].split(";")[1]) > minGreen) {
+            minGreen = parseInt(cleanList[k].split(";")[1])
+            console.log("MinGreen is: " + minGreen)}
+            }
+            }
+        console.log("Blue " + minBlue + " Red " + minRed + " Green" + minGreen);
+        power = minBlue * minRed * minGreen;
+        console.log(power);
+        runningTotal = runningTotal + power;
+        console.log("Running Total: " + runningTotal);
+        }
+
+        function pairHelper(pairs){
+        blueBalls = 0
+        redBalls = 0
+        greenBalls = 0
+        for( j =0 ; j < pairs.length ; j++) {
+
+        ballNumber = parseInt(pairs[j])
+        ballColor = pairs[j].replace(/\d+/g, '').trim()
+        if(ballColor == "blue") {
+        blueBalls =  ballNumber;}
+        else if(ballColor == "green") {
+        greenBalls = ballNumber;}
+        else if(ballColor == "red") {
+        redBalls = ballNumber;}
+        }
+        console.log("Returning: blueBalls:" + blueBalls + "redBalls:" + redBalls + "greenBalls:" + greenBalls)
+        return "blueBalls;" + blueBalls + ":redBalls;" + redBalls + ":greenBalls;" + greenBalls
+        }
+
+        document.getElementById('inputfile')
+            .addEventListener('change', function () {
+
+                let fr = new FileReader();
+                fr.onload = function () {
+                    const itemList = fr.result.split(/\r?\n/);
+
+                    for (let i = 0 ; i < itemList.length; i++) {
+                    processGame(itemList[i].replace("Game", ""));
+                    }
+                }
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+</body>
+
+</html>
