@@ -19,12 +19,12 @@ function partOne(){
  
         let holdDownTime = 1
         let differentWays = 0
-        for( ; holdDownTime < distance ; holdDownTime++){
+        for( ; holdDownTime < time ; holdDownTime++){
             let timeToMove = (time-holdDownTime)
             let distanceTraveled = holdDownTime * timeToMove;
            // console.log("timetomove:" +  timeToMove)
            // console.log("distanceTraveled"+ distanceTraveled)
-            if(distanceTraveled > distance){
+            if(distanceTraveled >= distance){
                 differentWays++;
             }
         }
