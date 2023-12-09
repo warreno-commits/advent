@@ -52,4 +52,15 @@ let runningHistoryTotal = 0
     console.log(runningHistoryTotal)
 }
 
+function partTwo(){
+let runningHistoryTotal = 0
+    for (let i = 0 ; i < lines.length; i++){
+    let lineArray = lines[i].replace("\r","").split(" ").reverse();
+    let historyValue = processHistory(lineArray);
+    runningHistoryTotal = runningHistoryTotal + historyValue
+    }
+    console.log(runningHistoryTotal)
+}
+
 partOne();
+partTwo();
